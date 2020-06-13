@@ -57,3 +57,18 @@ function showSlides(n) {
     dots[slideIndex - 1].className += " active";
     captionText.innerHTML = dots[slideIndex - 1].alt;
 }
+
+function showComments() {
+    fetch('/data').then(response => response.json()).then((comments) => {
+    const commentsElement = document.getElementById('comments');
+    for (comment of comments) {
+      commentsElement.appendChild(createListElement(comment));
+    }
+  });
+}
+
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}

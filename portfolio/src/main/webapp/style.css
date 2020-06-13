@@ -54,11 +54,15 @@ dl {
 }
 
 dt {
+    font-family: 'JetBrainsMono';
+    font-size: 12px;
     font-weight: bold;
     text-decoration: underline;
 }
 
 dd {
+    font-family: 'JetBrainsMono';
+    font-size: 12px;
     margin: 0;
     padding: 0 0 0.5em 0;
 }
@@ -148,4 +152,9 @@ dd {
 .active,
 .demo:hover {
   opacity: 1;
+}
+
+li {
+    font-family: 'JetBrainsMono';
+    font-size: 12px;
 }
