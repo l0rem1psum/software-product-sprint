@@ -27,13 +27,7 @@ import com.google.gson.Gson;
 @WebServlet("/comments")
 public class CommentServlet extends HttpServlet {
 
-    private final ArrayList<String> message = new ArrayList<>(
-        Arrays.asList(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
-            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-        )
-    );
+    private final ArrayList<String> message = new ArrayList<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -43,9 +37,25 @@ public class CommentServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String text = getParameter(request, "text-input", "");
+    message.add(text);
+
+    response.sendRedirect("/index.html");
+  }
+
   private String convertToJsonUsingGson(ArrayList<String> model) {
     Gson gson = new Gson();
     String json = gson.toJson(model);
     return json;
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 }

@@ -46,77 +46,85 @@
 		<h1>Comments</h1>
 		<button onclick="showComments()">Show me the comments!</button>
 		<ul id="comments"></ul>
-		<hr>
-		<h1>Favourite Places</h1>
-		<div class="container">
+		<form action="/comments" method="POST">
 
-			<!-- Full-width images with number text -->
-			<div class="mySlides">
-				<div class="numbertext">1 / 6</div>
-				<img src="images/Wuhan.jpg" style="width:100%">
-  </div>
+			<p>Please leave your precious comments here:</p>
+			<textarea name="text-input"></textarea>
+			<br/><br/>
 
+			<input type="submit" />
+    </form>
+			<hr>
+			<h1>Favourite Places</h1>
+			<div class="container">
+
+				<!-- Full-width images with number text -->
 				<div class="mySlides">
-					<div class="numbertext">2 / 6</div>
-					<img src="images/Chennai.jpg" style="width:100%">
+					<div class="numbertext">1 / 6</div>
+					<img src="images/Wuhan.jpg" style="width:100%">
   </div>
 
 					<div class="mySlides">
-						<div class="numbertext">3 / 6</div>
-						<img src="images/LA.jpg" style="width:100%">
+						<div class="numbertext">2 / 6</div>
+						<img src="images/Chennai.jpg" style="width:100%">
   </div>
 
 						<div class="mySlides">
-							<div class="numbertext">4 / 6</div>
-							<img src="images/SF.jpg" style="width:100%">
+							<div class="numbertext">3 / 6</div>
+							<img src="images/LA.jpg" style="width:100%">
   </div>
 
 							<div class="mySlides">
-								<div class="numbertext">5 / 6</div>
-								<img src="images/NYC.jpg" style="width:100%">
+								<div class="numbertext">4 / 6</div>
+								<img src="images/SF.jpg" style="width:100%">
   </div>
 
 								<div class="mySlides">
-									<div class="numbertext">6 / 6</div>
-									<img src="images/Wuhan.jpg" style="width:100%">
+									<div class="numbertext">5 / 6</div>
+									<img src="images/NYC.jpg" style="width:100%">
   </div>
 
-									<!-- Next and previous buttons -->
-									<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-									<a class="next" onclick="plusSlides(1)">&#10095;</a>
+									<div class="mySlides">
+										<div class="numbertext">6 / 6</div>
+										<img src="images/Wuhan.jpg" style="width:100%">
+  </div>
 
-									<!-- Image text -->
-									<div class="caption-container">
-										<p id="caption"></p>
-									</div>
+										<!-- Next and previous buttons -->
+										<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+										<a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-									<!-- Thumbnail images -->
-									<div class="row">
-										<div class="column">
-											<img class="demo cursor" src="images/Wuhan.jpg" style="width:100%" onclick="currentSlide(1)" alt="Wuhan, China">
-    </div>
+										<!-- Image text -->
+										<div class="caption-container">
+											<p id="caption"></p>
+										</div>
+
+										<!-- Thumbnail images -->
+										<div class="row">
 											<div class="column">
-												<img class="demo cursor" src="images/Chennai.jpg" style="width:100%" onclick="currentSlide(2)" alt="Chennai, India">
+												<img class="demo cursor" src="images/Wuhan.jpg" style="width:100%" onclick="currentSlide(1)" alt="Wuhan, China">
     </div>
 												<div class="column">
-													<img class="demo cursor" src="images/LA.jpg" style="width:100%" onclick="currentSlide(3)" alt="Los Angeles, USA">
+													<img class="demo cursor" src="images/Chennai.jpg" style="width:100%" onclick="currentSlide(2)" alt="Chennai, India">
     </div>
 													<div class="column">
-														<img class="demo cursor" src="images/SF.jpg" style="width:100%" onclick="currentSlide(4)" alt="San Francisco, USA">
+														<img class="demo cursor" src="images/LA.jpg" style="width:100%" onclick="currentSlide(3)" alt="Los Angeles, USA">
     </div>
 														<div class="column">
-															<img class="demo cursor" src="images/NYC.jpg" style="width:100%" onclick="currentSlide(5)" alt="New York City, USA">
+															<img class="demo cursor" src="images/SF.jpg" style="width:100%" onclick="currentSlide(4)" alt="San Francisco, USA">
     </div>
 															<div class="column">
-																<img class="demo cursor" src="images/Wuhan.jpg" style="width:100%" onclick="currentSlide(6)" alt="Wuhan, China">
+																<img class="demo cursor" src="images/NYC.jpg" style="width:100%" onclick="currentSlide(5)" alt="New York City, USA">
     </div>
+																<div class="column">
+																	<img class="demo cursor" src="images/Wuhan.jpg" style="width:100%" onclick="currentSlide(6)" alt="Wuhan, China">
+    </div>
+																</div>
 															</div>
+															<button onclick="addRandomGreeting()">Hello</button>
+															<div id="greeting-container"></div>
+
+
 														</div>
-														<button onclick="addRandomGreeting()">Hello</button>
-														<div id="greeting-container"></div>
-
-
-													</div>
 
 </body>
 
