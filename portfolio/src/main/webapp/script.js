@@ -59,16 +59,22 @@ function showSlides(n) {
 }
 
 function showComments() {
-    fetch('/data').then(response => response.json()).then((comments) => {
-    const commentsElement = document.getElementById('comments');
-    for (comment of comments) {
-      commentsElement.appendChild(createListElement(comment));
-    }
-  });
+    fetch('/comments').then(response => response.json()).then((comments) => {
+        const commentsElement = document.getElementById('comments');
+        for (comment of comments) {
+            commentsElement.appendChild(createListElement(comment));
+        }
+    });
 }
 
 function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
+    const liElement = document.createElement('li');
+    liElement.innerText = text;
+    return liElement;
+}
+
+async function getRandomQuoteUsingAsyncAwait() {
+    const response = await fetch('/data');
+    const quote = await response.text();
+    document.getElementById('greet').innerText = quote;
 }

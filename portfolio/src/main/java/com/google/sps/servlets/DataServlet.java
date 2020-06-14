@@ -27,25 +27,22 @@ import com.google.gson.Gson;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-    private final ArrayList<String> message = new ArrayList<>(
-        Arrays.asList(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
-            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-        )
-    );
+	private ArrayList<String> greets;
 
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = this.convertToJsonUsingGson(message);
+    @Override
+  	public void init() {
+    	greets = new ArrayList<>();
+    	greets.add("Hi, welcome to Wenxuan's portfolio site. Glad that you are here:)");
+		greets.add("Hi there, welcome to Wenxuan's portfolio site. So happy that you are here:)");
+		greets.add("Hi, this is Wenxuan's portfolio site. Welcome!");
+  	}
 
-    response.setContentType("application/json;");
-    response.getWriter().println(json);
-  }
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-  private String convertToJsonUsingGson(ArrayList<String> model) {
-    Gson gson = new Gson();
-    String json = gson.toJson(model);
-    return json;
-  }
+		String greet = greets.get((int) (Math.random() * greets.size()));
+		response.setContentType("text/html;");
+		response.getWriter().println(greet);
+	}
+
 }
