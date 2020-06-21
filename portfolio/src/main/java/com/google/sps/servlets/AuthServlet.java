@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthServlet extends HttpServlet {
 
   private static final String LOGIN_STATUS = "/status";
-
+  private static final String LOGIN = "/login";
 
   private UserService userService;
 
@@ -52,6 +52,12 @@ public class AuthServlet extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
             break;
+        case LOGIN:
+            String urlToRedirectToAfterUserLogsIn = "/";
+            String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+
+            response.setContentType("text/html;");
+            response.getWriter().println(loginUrl);
         default:
             break;
     }
