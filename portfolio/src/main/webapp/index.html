@@ -9,10 +9,10 @@
 	<script src="script.js"></script>
 </head>
 
-<body>
+<body onload="getRandomQuoteUsingAsyncAwait()">
 	<div id="content">
 		<h1>About Myself</h1>
-		<p>Hi, welcome to Wenxuan's portfolio site. Glad that you are here:)</p>
+		<p id="greet">Hi, welcome to Wenxuan's portfolio site. Glad that you are here:)</p>
 		<p>The reason that I'm going with this background is because after trying so many options, this is the only
 			choice that doesn't block the texts and doesn't look weird.</p>
 		<p>I have chosen JetBrains Mono as the choice of font for this website. This is my favourite font so far, so I
@@ -28,87 +28,104 @@
 			</dd>
 			<dt><a href="https://hub.docker.com/r/l0rem1psum/scrypt">&#127912Dockerized Firebase SCrypt</a></dt>
 			<dd>- A dockerized version of Firebase's implementation of SCrypt, proxied by Python Flask.</dd>
-			<dt><a href="https://github.com/l0rem1psum/docker-mysql-keepalived">&#127922MySQL failover with Keepalived</a></dt>
+			<dt><a href="https://github.com/l0rem1psum/docker-mysql-keepalived">&#127922MySQL failover with
+					Keepalived</a></dt>
 			<dd>- A demo of achieving highly available MySQL by using Keepalived for failover.</dd>
 			<dt><a href="https://github.com/l0rem1psum/OTPy">&#127919OTPy</a></dt>
 			<dd>- A Python package implementing RFC 6238 for One-Time Password (OTP).</dd>
 			<dt><a href="https://github.com/l0rem1psum/Circuit-Master">&#128221Circuit Master</a></dt>
 			<dd>- An Android game written in C# to teach players how logic gates work.</dd>
-			<dt><a href="https://github.com/l0rem1psum/Search-Github-Repositories">&#127915Github Repositories Searcher</a></dt>
+			<dt><a href="https://github.com/l0rem1psum/Search-Github-Repositories">&#127915Github Repositories
+					Searcher</a></dt>
 			<dd>- A simple Vue.js app for searching Github users and view README files of their projects.</dd>
 		</dl>
 		<p>If you are interested in the projects that I have worked on and are currently working on. Please feel free to
 			checkout my <a href="https://github.com/l0rem1psum">Github</a> or contact me via <a
 				href="https://www.linkedin.com/in/l0rem1psum/">Linkedin</a>.</p>
 		<hr>
-		<h1>Favourite Places</h1>
-		<div class="container">
+		<h1>Comments</h1>
+		<button onclick="showComments()">Show me the comments!</button>
+		<ul id="comments"></ul>
+		<form action="/comments" method="POST">
 
-			<!-- Full-width images with number text -->
-			<div class="mySlides">
-				<div class="numbertext">1 / 6</div>
-				<img src="images/Wuhan.jpg" style="width:100%">
-  </div>
+			<p>Please leave your precious comments here:</p>
+			<textarea name="text-input"></textarea>
+			<br/><br/>
 
+			<input type="submit" />
+    </form>
+			<hr>
+			<h1>Favourite Places</h1>
+			<div class="container">
+
+				<!-- Full-width images with number text -->
 				<div class="mySlides">
-					<div class="numbertext">2 / 6</div>
-					<img src="images/Chennai.jpg" style="width:100%">
+					<div class="numbertext">1 / 6</div>
+					<img src="images/Wuhan.jpg" style="width:100%">
   </div>
 
 					<div class="mySlides">
-						<div class="numbertext">3 / 6</div>
-						<img src="images/LA.jpg" style="width:100%">
+						<div class="numbertext">2 / 6</div>
+						<img src="images/Chennai.jpg" style="width:100%">
   </div>
 
 						<div class="mySlides">
-							<div class="numbertext">4 / 6</div>
-							<img src="images/SF.jpg" style="width:100%">
+							<div class="numbertext">3 / 6</div>
+							<img src="images/LA.jpg" style="width:100%">
   </div>
 
 							<div class="mySlides">
-								<div class="numbertext">5 / 6</div>
-								<img src="images/NYC.jpg" style="width:100%">
+								<div class="numbertext">4 / 6</div>
+								<img src="images/SF.jpg" style="width:100%">
   </div>
 
 								<div class="mySlides">
-									<div class="numbertext">6 / 6</div>
-									<img src="images/Wuhan.jpg" style="width:100%">
+									<div class="numbertext">5 / 6</div>
+									<img src="images/NYC.jpg" style="width:100%">
   </div>
 
-									<!-- Next and previous buttons -->
-									<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-									<a class="next" onclick="plusSlides(1)">&#10095;</a>
+									<div class="mySlides">
+										<div class="numbertext">6 / 6</div>
+										<img src="images/Wuhan.jpg" style="width:100%">
+  </div>
 
-									<!-- Image text -->
-									<div class="caption-container">
-										<p id="caption"></p>
-									</div>
+										<!-- Next and previous buttons -->
+										<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+										<a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-									<!-- Thumbnail images -->
-									<div class="row">
-										<div class="column">
-											<img class="demo cursor" src="images/Wuhan.jpg" style="width:100%" onclick="currentSlide(1)" alt="Wuhan, China">
-    </div>
+										<!-- Image text -->
+										<div class="caption-container">
+											<p id="caption"></p>
+										</div>
+
+										<!-- Thumbnail images -->
+										<div class="row">
 											<div class="column">
-												<img class="demo cursor" src="images/Chennai.jpg" style="width:100%" onclick="currentSlide(2)" alt="Chennai, India">
+												<img class="demo cursor" src="images/Wuhan.jpg" style="width:100%" onclick="currentSlide(1)" alt="Wuhan, China">
     </div>
 												<div class="column">
-													<img class="demo cursor" src="images/LA.jpg" style="width:100%" onclick="currentSlide(3)" alt="Los Angeles, USA">
+													<img class="demo cursor" src="images/Chennai.jpg" style="width:100%" onclick="currentSlide(2)" alt="Chennai, India">
     </div>
 													<div class="column">
-														<img class="demo cursor" src="images/SF.jpg" style="width:100%" onclick="currentSlide(4)" alt="San Francisco, USA">
+														<img class="demo cursor" src="images/LA.jpg" style="width:100%" onclick="currentSlide(3)" alt="Los Angeles, USA">
     </div>
 														<div class="column">
-															<img class="demo cursor" src="images/NYC.jpg" style="width:100%" onclick="currentSlide(5)" alt="New York City, USA">
+															<img class="demo cursor" src="images/SF.jpg" style="width:100%" onclick="currentSlide(4)" alt="San Francisco, USA">
     </div>
 															<div class="column">
-																<img class="demo cursor" src="images/Wuhan.jpg" style="width:100%" onclick="currentSlide(6)" alt="Wuhan, China">
+																<img class="demo cursor" src="images/NYC.jpg" style="width:100%" onclick="currentSlide(5)" alt="New York City, USA">
     </div>
+																<div class="column">
+																	<img class="demo cursor" src="images/Wuhan.jpg" style="width:100%" onclick="currentSlide(6)" alt="Wuhan, China">
+    </div>
+																</div>
 															</div>
+															<button onclick="addRandomGreeting()">Hello</button>
+															<div id="greeting-container"></div>
+
+
 														</div>
-														<button onclick="addRandomGreeting()">Hello</button>
-														<div id="greeting-container"></div>
-													</div>
+
 </body>
 
 </html>

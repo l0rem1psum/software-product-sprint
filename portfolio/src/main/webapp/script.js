@@ -57,3 +57,24 @@ function showSlides(n) {
     dots[slideIndex - 1].className += " active";
     captionText.innerHTML = dots[slideIndex - 1].alt;
 }
+
+function showComments() {
+    fetch('/comments').then(response => response.json()).then((comments) => {
+        const commentsElement = document.getElementById('comments');
+        for (comment of comments) {
+            commentsElement.appendChild(createListElement(comment));
+        }
+    });
+}
+
+function createListElement(text) {
+    const liElement = document.createElement('li');
+    liElement.innerText = text;
+    return liElement;
+}
+
+async function getRandomQuoteUsingAsyncAwait() {
+    const response = await fetch('/data');
+    const quote = await response.text();
+    document.getElementById('greet').innerText = quote;
+}
