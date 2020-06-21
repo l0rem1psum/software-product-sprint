@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
@@ -33,13 +35,17 @@ import com.google.gson.Gson;
 @WebServlet("/comments")
 public class CommentServlet extends HttpServlet {
 
+  private static final String COMMENT_FORMAT = "%s - posted by %s.";
+
   private final ArrayList<String> message = new ArrayList<>();
 
   private DatastoreService datastore;
+  private UserService userService;
 
   @Override
   public void init() {
       datastore = DatastoreServiceFactory.getDatastoreService();
+      userService = UserServiceFactory.getUserService();
   }
 
   @Override
@@ -49,7 +55,9 @@ public class CommentServlet extends HttpServlet {
 
     ArrayList<String> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      comments.add((String) entity.getProperty("comment"));
+      String comment = (String) entity.getProperty("comment");
+      String postedBy = (String) entity.getProperty("email");
+      comments.add(String.format(COMMENT_FORMAT, comment, postedBy));
     }
 
     String json = this.convertToJsonUsingGson(comments);
@@ -66,6 +74,7 @@ public class CommentServlet extends HttpServlet {
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("comment", text);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("email", userService.getCurrentUser().getEmail());
     
     datastore.put(commentEntity);
 
