@@ -59,12 +59,29 @@ function showSlides(n) {
 }
 
 function showComments() {
-    fetch('/comments').then(response => response.json()).then((comments) => {
-        const commentsElement = document.getElementById('comments');
-        for (comment of comments) {
-            commentsElement.appendChild(createListElement(comment));
+    fetch('/auth/status').then(response => {
+        if (response.status == 202) {
+            var loggedInCommentSection = document.getElementById("loggedin");
+            loggedInCommentSection.style.display = "block";
+            var loggedOutCommentSection = document.getElementById("loggedout");
+            loggedOutCommentSection.style.display = "none";
+
+            fetch('/comments').then(response => response.json()).then((comments) => {
+                const commentsElement = document.getElementById('comments');
+                for (comment of comments) {
+                    commentsElement.appendChild(createListElement(comment));
+                }
+            });
+        } else {
+            var loggedInCommentSection = document.getElementById("loggedin");
+            loggedInCommentSection.style.display = "none";
+            var loggedOutCommentSection = document.getElementById("loggedout");
+            loggedOutCommentSection.style.display = "block";
+
+            const commentsElement = document.getElementById('comments');
+            commentsElement.appendChild(createListElement("Please login first to see the comments"));
         }
-    });
+    })
 }
 
 function createListElement(text) {
@@ -73,8 +90,8 @@ function createListElement(text) {
     return liElement;
 }
 
-async function getRandomQuoteUsingAsyncAwait() {
-    const response = await fetch('/data');
-    const quote = await response.text();
-    document.getElementById('greet').innerText = quote;
+function login() {
+    document.getElementById("loginButton").onclick = function() {
+        fetch('/auth/login').then(r => r.text()).then(url => location.href = url);
+    };
 }

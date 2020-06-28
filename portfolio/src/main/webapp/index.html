@@ -9,10 +9,10 @@
 	<script src="script.js"></script>
 </head>
 
-<body onload="getRandomQuoteUsingAsyncAwait()">
+<body onload="showComments()">
 	<div id="content">
 		<h1>About Myself</h1>
-		<p id="greet">Hi, welcome to Wenxuan's portfolio site. Glad that you are here:)</p>
+		<p>Hi, welcome to Wenxuan's portfolio site. Glad that you are here:)</p>
 		<p>The reason that I'm going with this background is because after trying so many options, this is the only
 			choice that doesn't block the texts and doesn't look weird.</p>
 		<p>I have chosen JetBrains Mono as the choice of font for this website. This is my favourite font so far, so I
@@ -43,8 +43,7 @@
 			checkout my <a href="https://github.com/l0rem1psum">Github</a> or contact me via <a
 				href="https://www.linkedin.com/in/l0rem1psum/">Linkedin</a>.</p>
 		<hr>
-		<h1>Comments</h1>
-		<button onclick="showComments()">Show me the comments!</button>
+		<h1>Comments</h1><div id="loggedin">
 		<ul id="comments"></ul>
 		<form action="/comments" method="POST">
 
@@ -53,7 +52,11 @@
 			<br/><br/>
 
 			<input type="submit" />
-    </form>
+    </form></div>
+    <div id="loggedout">
+        <p>You need to login first to see and post comments:)</p>
+        <button id="loginButton" onclick="login()">Login</button>
+    </div>
 			<hr>
 			<h1>Favourite Places</h1>
 			<div class="container">
