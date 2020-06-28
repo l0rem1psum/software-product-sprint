@@ -34,13 +34,13 @@ public final class FindMeetingQuery {
     }
 
     List<TimeRange> impossbleTimeRanges = new ArrayList<>();
-    for (final Event event : events) {
-      final Set<String> attendeeIntersection = new HashSet<>(event.getAttendees());
+    events.forEach(e -> {
+      Set<String> attendeeIntersection = new HashSet<>(e.getAttendees());
       attendeeIntersection.retainAll(request.getAttendees());
       if (attendeeIntersection.size() != 0) {
-        impossbleTimeRanges.add(event.getWhen());
+        impossbleTimeRanges.add(e.getWhen());
       }
-    }
+    });
     Collections.sort(impossbleTimeRanges, TimeRange.ORDER_BY_START);
 
     List<TimeRange> freeTimeRanges = findFreeTimeRangesIn(impossbleTimeRanges, TimeRange.START_OF_DAY,
@@ -55,14 +55,15 @@ public final class FindMeetingQuery {
     if (impossibleTimeRanges.size() == 0) {
       return new ArrayList<>(Arrays.asList(TimeRange.fromStartEnd(start, end, true)));
     } else if (impossibleTimeRanges.size() == 1) {
-      if (impossibleTimeRanges.get(0).start() > start) {
-        return new ArrayList<>(Arrays.asList(TimeRange.fromStartEnd(start, impossibleTimeRanges.get(0).start(), false),
-            TimeRange.fromStartEnd(impossibleTimeRanges.get(0).end(), end, true)));
+      TimeRange curr = impossibleTimeRanges.get(0);
+      if (curr.start() > start) {
+        return new ArrayList<>(Arrays.asList(TimeRange.fromStartEnd(start, curr.start(), false),
+            TimeRange.fromStartEnd(curr.end(), end, true)));
       } else {
-        if (impossibleTimeRanges.get(0).end() <= start) {
+        if (curr.end() <= start) {
           return new ArrayList<>(Arrays.asList(TimeRange.fromStartEnd(start, end, true)));
         } else {
-          return new ArrayList<>(Arrays.asList(TimeRange.fromStartEnd(impossibleTimeRanges.get(0).end(), end, true)));
+          return new ArrayList<>(Arrays.asList(TimeRange.fromStartEnd(curr.end(), end, true)));
         }
       }
     } else {
